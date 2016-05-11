@@ -11,7 +11,7 @@ class Usuario():
 		self.lista_carros = []
 	
 	def anunciar_carro(self, fabricante, modelo, ano, cor, blindagem):
-		self.carro = veiculo(fabricante, modelo, ano, cor, blindagem)
+		self.carro = Veiculo(fabricante, modelo, ano, cor, blindagem)
 		self.lista_carros.append(self.carro)
 		
 class Veiculo():
