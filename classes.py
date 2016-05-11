@@ -8,16 +8,16 @@ class Usuario():
 		self.cpf = cpf
 		self.nickname = nickname
 		self.senha = senha
-		self.lista_carros_augados = []
-		self.lista_carros_alugados = []
+		self.dicio_carros_anunciados = {}
+		self.dicio_carros_alugados = {}
 	
 	def anunciar_carro(self, fabricante, modelo, ano, cor, blindagem):
 		self.carro_anunciado = Veiculo(fabricante, modelo, ano, cor, blindagem)
-		self.lista_carros_anunciados.append(self.carro_anunciado)
-		
+		self.dicio_carros_anunciados[self.nickname] = self.carro_anunciado		
+	
 	def alugar_carro(self, fabricante, modelo, ano, cor, blindagem):
 		self.carro_alugado = Veiculo(fabricante, modelo, ano, cor, blindagem)
-		self.lista_carros_alugados.append(self.carro_alugado)		
+		self.dicio_carros_alugados[self.nickname] = self.carro_alugado		
 		
 class Veiculo():
 	
@@ -27,3 +27,4 @@ class Veiculo():
 		self.ano = ano
 		self.cor = cor
 		self.blindagem = blindagem
+		
