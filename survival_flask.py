@@ -79,9 +79,10 @@ def home():
 
 
 @app.route('/anunciar')
-def anuncioar():
+def anunciar():
     return render_template ('anunciar.html')
-
-app.run(debug=True, use_reloader=True)
+    
+if __name__ == "__main__":
+    app.run(debug=True, use_reloader=True)
 
 
