@@ -63,7 +63,25 @@ def Reg():
     return render_template('register.html', dic = DU, erro = '')
 
 
+@app.route('/home')
+def home():
+    return render_template("home.html", dic = DU, erro = '')
 
-#app.run()
+@app.route('/alugar') #endereço para alugar um carro (I)
+
+@app.route('/alugar/modelo') # (II) escolha do modelo de carro
+
+@app.route('/alugar/tabela') # (III) escolher um dos carros dentre os da tabela 
+
+@app.route('/alugar/anúncio') # (IV) página do anúncio com opções de barganhar ou alugar
+
+@app.route('/alugar/barganha') #(V) opção de dar um lance de barganha 
+
+
+@app.route('/anunciar')
+def anuncioar():
+    return render_template ('anunciar.html')
+
+app.run(debug=True, use_reloader=True)
 
 
