@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html><head>
+<title>Aluguel de Carros</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="" />
+<meta name="copyright" content="" />
+<link rel="stylesheet" type="text/css" href="./css/kickstart.css" media="all" />                  <!-- KICKSTART -->
+<link rel="stylesheet" type="text/css" href="./style.css" media="all" />                          <!-- CUSTOM STYLES -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src="./js/kickstart.js"></script>                                  <!-- KICKSTART -->
+</head>
+<body>
+
+<div id="header"></div>
+
+<div class="grid">
+
+	<div class="col_4">
+		<h3><i class="fa fa-car"></i> <i class="fa fa-truck"></i> Aluguel de Carros </h3>
+	</div>
+
+<div class="col_1"></div>
+	<div class="col_10">
+		<ul class="tabs left">
+		<li><a href="#tabr1">Tela Inicial</a></li>
+		<li><a href="#tabr2">Sign In</a></li>
+		</ul>    
+
+<!-- Tab 2 - Tela Inicial -->
+		<div id="tabr2" class="tab-content">
+			<div class="grid">
+
+				<div class="col_2"></div>
+				<div class="col_8">
+
+					<form class="vertical" method="POST" action="./homepage">
+					<fieldset>
+						<legend>Tela Inicial</legend>
+					
+						<div class="grid">
+
+							<div class="col_6">
+							<label for="placa">Login</label>
+							<input id="placa" name="placa" type="text" />
+							</div>
+
+							<div class="col_6">
+							<label for="fabricante">Senha</label>
+							<input id="fabricante" name="fabricante" type="text" />
+							</div>
+
+							<div class="col_12 right">
+							<button class="medium"><i class="fa fa-car"></i>Entrar</button>
+							</div>
+						</div>
+					</fieldset>
+					</form>
+				</div>
+				<div class="col_2"></div>
+			</div>
+		</div>
+
+	</div>
+
+	<!-- Tab 2 - Sign In -->
+		<div id="tabr2" class="tab-content">
+			<div class="grid">
+
+				<div class="col_2"></div>
+				<div class="col_8">
+				   
+					<form class="vertical" method="POST" action="./homepage">
+					<fieldset>
+						<legend>Novo Veículo</legend>
+					
+						<div class="grid">
+
+							
+
+							<div class="col_6">
+							<label for="placa">Nome Completo</label>
+							<input id="placa" name="placa" type="text" />
+							</div>
+
+							<div class="col_6">
+							<label for="fabricante">Email</label>
+							<input id="fabricante" name="fabricante" type="text" />
+							</div>
+
+							<div class="col_6">
+							<label for="modelo">Endereço</label>
+							<input id="modelo" name="modelo" type="text" />
+							</div>
+
+							<div class="col_6">
+							<label for="cor">CPF</label>
+							<input id="cor" name="cor" type="text" />
+							</div>
+
+                                    
+							<div class="col_6">
+							<label for="cor">Usuário</label>
+							<input id="cor" name="cor" type="text" />
+							</div>
+
+                                      
+							<div class="col_6">
+							<label for="cor">Senha</label>
+							<input id="cor" name="cor" type="text" />
+							</div>
+
+							
+							<div class="col_12 right">
+							<button class="medium"><i class="fa fa-car"></i> Cadastrar</button>
+							</div>
+						</div>
+					</fieldset>
+					</form>
+				</div>
+				<div class="col_2"></div>
+			</div>
+		</div>
+
+	</div>
+	<div class="col_1"></div>
+</div>
