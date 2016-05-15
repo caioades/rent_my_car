@@ -1,4 +1,5 @@
 import firecall
+from survival_flask import DU
 my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
 
 class Usuario():
@@ -14,6 +15,8 @@ class Usuario():
 		self.dicio_carros_anunciados = {}
 		self.dicio_carros_alugados = {}
 		self.dicio_usuarios = {}
+		self.DU = DU
+		
 	
 	def anunciar_carro (self, fabricante, modelo, ano, cor, blindagem):
 		self.carro_anunciado = Veiculo(fabricante, modelo, ano, cor, blindagem)
@@ -24,7 +27,8 @@ class Usuario():
 		self.dicio_carros_alugados[self.nickname] = self.carro_alugado				
 
 	def salvar (self):
-		my_firebase.put(point="/Dados do usuário", data=self.dicio_usuarios)
+		my_firebase.put(point="/Dados do usuário", data=self.DU)
+		
 		
 
 class Veiculo():
