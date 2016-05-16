@@ -11,9 +11,6 @@ from flask import Flask, render_template, request, redirect, url_for
 from classes import Usuario, Veiculo
 
 
-
-DU = {} #dicionario dos usuários : {usuario : senha}
-
 app = Flask(__name__)
 
 @app.route("/", methods=['GET','POST']) #decorator '@' - no caso, uma objeto da classe Flask, com o método .route() 
@@ -24,17 +21,17 @@ def LogIn(): #mainpage - foto com login e senha
         login = request.form['Login']
         senha = request.form['Senha']
         
-        if login in DU:
-            if DU[login] == senha:
+        if login in Usuario.DU:
+            if Usuario.DU[login] == senha:
                 return #prosseguir 
             else: 
                 s = 'Usuário ou senha inexistente!' #Mensagem de erro
-                return render_template('main.html', dic = DU, erro = s)
+                return render_template('main.html', dic = Usuario.DU, erro = s)
         else:
             e = 'Usuário ou senha inexistente!' #Mensagem de erro
-            return render_template('main.html', dic = DU, erro = e)
+            return render_template('main.html', dic = Usuario.DU, erro = e)
         
-    return render_template('main.html', dic = DU, erro = '')
+    return render_template('main.html', dic = Usuario.DU, erro = '')
     
 
 @app.route("/register", methods=['GET','POST'])
@@ -49,23 +46,23 @@ def Reg():
         cpf = request.form['CPF']
         email = request.form['Email']
         nickname = request.form['Usuário']
-        if nickname in DU.keys:
+        if nickname in Usuario.DU.keys:
             e = 'Esse nome de usuário já existe! Por favor, digite outro' 
-            return render_template('register.html', dic = DU, erro = e)
+            return render_template('register.html', dic = Usuario.DU, erro = e)
         senha = request.form['Senha']
-        if senha in DU.values:
+        if senha in Usuario.DU.values:
             f = 'Esta senha já existe! Por favor, digite outra'
-            return render_template('register.html', dic = DU, erro = f)
+            return render_template('register.html', dic = Usuario.DU, erro = f)
         
         usuario = Usuario(email, nome_completo, endereco, cep, cpf, nickname, senha)
-        DU[usuario] = [usuario.email, usuario.nome_completo, usuario.endereco, usuario.cep,usuario.cpf, usuario.nickname, usuario.senha]
+        Usuario.DU[usuario] = [usuario.email, usuario.nome_completo, usuario.endereco, usuario.cep,usuario.cpf, usuario.nickname, usuario.senha]
         
-    return render_template('register.html', dic = DU, erro = '')
+    return render_template('register.html', dic = Usuario.DU, erro = '')
 
 
 @app.route('/home')
 def home():
-    return render_template("home.html", dic = DU, erro = '')
+    return render_template("home.html", dic = Usuario.DU, erro = '')
 
 @app.route('/alugar') #endereço para alugar um carro (I)
 
