@@ -64,7 +64,8 @@ def Reg():
         
         usuario = Usuario(email, nome_completo, endereco, cep, cpf, nickname, senha)
         DG[usuario] = [usuario.email, usuario.nome_completo, usuario.endereco, usuario.cep,usuario.cpf, usuario.nickname, usuario.senha]
-        usuario.salvar()
+        my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com")
+        my_firebase.put(point="/Dicionário Geral", data=DG)
         
     return render_template('register.html', dic = DG, erro = '')
 
