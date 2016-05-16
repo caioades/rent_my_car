@@ -26,12 +26,12 @@ def LogIn(): #mainpage - foto com login e senha
                 return #prosseguir 
             else: 
                 s = 'Usuário ou senha inexistente!' #Mensagem de erro
-                return render_template('main.html', dic = Usuario.DU, erro = s)
+                return render_template('main.html', dic = usuario.DU, erro = s)
         else:
             e = 'Usuário ou senha inexistente!' #Mensagem de erro
-            return render_template('main.html', dic = Usuario.DU, erro = e)
+            return render_template('main.html', dic = usuario.DU, erro = e)
         
-    return render_template('main.html', dic = Usuario.DU, erro = '')
+    return render_template('main.html', dic = usuario.DU, erro = '')
     
 
 @app.route("/register", methods=['GET','POST'])
@@ -46,24 +46,24 @@ def Reg():
         cpf = request.form['CPF']
         email = request.form['Email']
         nickname = request.form['Usuário']
-        if nickname in Usuario.DU.keys:
+        if nickname in usuario.DU.keys:
             e = 'Esse nome de usuário já existe! Por favor, digite outro' 
-            return render_template('register.html', dic = Usuario.DU, erro = e)
+            return render_template('register.html', dic = usuario.DU, erro = e)
         senha = request.form['Senha']
-        if senha in Usuario.DU.values:
+        if senha in usuario.DU.values:
             f = 'Esta senha já existe! Por favor, digite outra'
-            return render_template('register.html', dic = Usuario.DU, erro = f)
+            return render_template('register.html', dic = usuario.DU, erro = f)
         
         usuario = Usuario(email, nome_completo, endereco, cep, cpf, nickname, senha)
         usuario.DU[usuario] = [usuario.email, usuario.nome_completo, usuario.endereco, usuario.cep,usuario.cpf, usuario.nickname, usuario.senha]
         usuario.salvar()
         
-    return render_template('register.html', dic = Usuario.DU, erro = '')
+    return render_template('register.html', dic = usuario.DU, erro = '')
 
 
 @app.route('/home')
 def home():
-    return render_template("Homepage.html", dic = Usuario.DU, erro = '')
+    return render_template("Homepage.html", dic = usuario.DU, erro = '')
 
 @app.route('/alugar') #endereço para alugar um carro (I)
 
@@ -84,3 +84,4 @@ if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)
 
 
+Usuario
