@@ -55,14 +55,15 @@ def Reg():
             return render_template('register.html', dic = Usuario.DU, erro = f)
         
         usuario = Usuario(email, nome_completo, endereco, cep, cpf, nickname, senha)
-        Usuario.DU[usuario] = [usuario.email, usuario.nome_completo, usuario.endereco, usuario.cep,usuario.cpf, usuario.nickname, usuario.senha]
+        usuario.DU[usuario] = [usuario.email, usuario.nome_completo, usuario.endereco, usuario.cep,usuario.cpf, usuario.nickname, usuario.senha]
+        usuario.salvar()
         
     return render_template('register.html', dic = Usuario.DU, erro = '')
 
 
 @app.route('/home')
 def home():
-    return render_template("home.html", dic = Usuario.DU, erro = '')
+    return render_template("Homepage.html", dic = Usuario.DU, erro = '')
 
 @app.route('/alugar') #endereço para alugar um carro (I)
 
