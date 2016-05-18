@@ -11,56 +11,34 @@
 <script type="text/javascript" src="./js/kickstart.js"></script>                                  <!-- KICKSTART -->
 </head>
 <body>
-		<div id="register" class="tab-content">
+
+		<div id="Tela_Inicial" class="tab-content">
 			<div class="grid">
 
 				<div class="col_2"></div>
 				<div class="col_8">
-				   
-					<form class="vertical" method="POST">
+                       <a href="/register" />
+				 <button class="medium"><i class="fa fa-car"></i>Sign In</button>
+                       </a>
+					<form class="vertical" method="POST" action="./Homepage">
 					<fieldset>
-						<legend>Novo Veículo</legend>
+						<legend>Tela Inicial</legend>
 					
 						<div class="grid">
 
-							
-
 							<div class="col_6">
-							<label for="placa">Nome Completo</label>
-							<input id="placa" name="placa" type="text" />
+							<label for="login">Login</label>
+							<input id="login" name="login" type="text" />
 							</div>
 
 							<div class="col_6">
-							<label for="fabricante">Email</label>
-							<input id="fabricante" name="fabricante" type="text" />
+							<label for="senha">Senha</label>
+							<input id="senha" name="senha" type="text" />
 							</div>
 
-							<div class="col_6">
-							<label for="modelo">Endereço</label>
-							<input id="modelo" name="modelo" type="text" />
-							</div>
-
-							<div class="col_6">
-							<label for="cor">CPF</label>
-							<input id="cor" name="cor" type="text" />
-							</div>
-
-                                    
-							<div class="col_6">
-							<label for="cor">Usuário</label>
-							<input id="cor" name="cor" type="text" />
-							</div>
-
-                                      
-							<div class="col_6">
-							<label for="cor">Senha</label>
-							<input id="cor" name="cor" type="text" />
-							</div>
-
-							
 							<div class="col_12 right">
-                                       <a href="/" />
-							<button class="medium"><i class="fa fa-car"></i> Cadastrar</button>
+                                       <a href="/Homepage" />
+							<button class="medium"><i class="fa fa-car"></i>Entrar</button>
                                        </a>
 							</div>
 						</div>
@@ -68,11 +46,10 @@
 					</form>
 				</div>
 				<div class="col_2"></div>
+                       
 			</div>
-		</div>
 
 	</div>
-	<div class="col_1"></div>
-</div>
+
 </body>
 </html>

@@ -28,7 +28,7 @@ class Usuario():
            DU = {}
            DU[self.usuario] = self.email, self.nome_completo,self.endereco,self.cep, self.cpf,self.nickname,self.senha,self.dicio_carros_anunciados,self.dicio_carros_alugados   
            my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
-           my_firebase.put(point="/Dados do usuário", data=DU)
+           my_firebase.put_sync(point="/Dados do usuário/{0}".format(self.nickname), data=DU)
 		
 		
 
