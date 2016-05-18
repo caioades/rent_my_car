@@ -11,57 +11,27 @@
 <script type="text/javascript" src= "{{ url_for('static',filename='js/kickstart.js') }}"></script>                                  <!-- KICKSTART -->
 </head>
 <body>
-		<div id="register" class="tab-content">
+
+		<div id="modelo" class="tab-content">
 			<div class="grid">
 
 				<div class="col_2"></div>
 				<div class="col_8">
-				   
-					<form class="vertical" method="POST" action="./">
+				  
+					<form class="vertical" method="POST" action="./alugar/tabela">
 					<fieldset>
-						<legend>Novo Veículo</legend>
+						<legend>Escolha Do Modelo</legend>
 					
 						<div class="grid">
 
-							
+					     <label for="select1">Select Field</label>
+                                 <select id="select1">
+                                 <option value="0">Escolha o Modelo</option>
+                                 <option value="1">modelos</option>
+                                 </select>
 
-							<div class="col_6">
-							<label for="placa">Nome Completo</label>
-							<input id="placa" name="placa" type="text" />
-							</div>
-
-							<div class="col_6">
-							<label for="fabricante">Email</label>
-							<input id="fabricante" name="fabricante" type="text" />
-							</div>
-
-							<div class="col_6">
-							<label for="modelo">Endereço</label>
-							<input id="modelo" name="modelo" type="text" />
-							</div>
-
-							<div class="col_6">
-							<label for="cor">CPF</label>
-							<input id="cor" name="cor" type="text" />
-							</div>
-
-                                    
-							<div class="col_6">
-							<label for="cor">Usuário</label>
-							<input id="cor" name="cor" type="text" />
-							</div>
-
-                                      
-							<div class="col_6">
-							<label for="cor">Senha</label>
-							<input id="cor" name="cor" type="text" />
-							</div>
-
-							
 							<div class="col_12 right">
-                                       <a href="/#Homepage.html" />
-							<button class="medium"><i class="fa fa-car"></i> Cadastrar</button>
-                                       </a>
+							<button class="medium"><i class="fa fa-car"></i>Procurar</button>
 							</div>
 						</div>
 					</fieldset>
@@ -74,7 +44,7 @@
 	</div>
 	<div class="col_1"></div>
 </div>
-
+ 
 
 <div class="clear"></div>
 <div id="footer">
@@ -82,5 +52,5 @@
 </div>
 
 
-</body>
+</body>         
 </html>
