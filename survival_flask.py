@@ -13,7 +13,7 @@ from classes import Usuario, Veiculo
 import firecall
 
 
-app = Flask(__name__, static_folder = "/Users/caioades/Documents/Insper/Design\de\Software/Projeto\Final/rent_my_car")
+app = Flask(__name__)
 
 Veiculos = {}
 @app.route("/", methods=['GET','POST']) #decorator '@' - no caso, uma objeto da classe Flask, com o método .route() 
