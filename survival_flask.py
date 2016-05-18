@@ -13,7 +13,7 @@ from classes import Usuario, Veiculo
 import firecall
 
 
-app = Flask(__name__, static_folder = "/Users/caioades/Documents/Insper/Design de Software/Projeto Final/rent_my_car")
+app = Flask(__name__, static_folder = "/Users/caioades/Documents/Insper/Design\de\Software/Projeto\Final/rent_my_car")
 
 Veiculos = {}
 @app.route("/", methods=['GET','POST']) #decorator '@' - no caso, uma objeto da classe Flask, com o método .route() 
@@ -38,15 +38,15 @@ def LogIn(): #mainpage - foto com login e senha
             e = 'Usuário ou senha inexistente!' #Mensagem de erro
             return render_template('main.html', dic = DG, erro = e)
         
-    return render_template('main.html', dic = Usuario('','','','','','',''), erro = '')
+    return render_template('main.html', dic = DG, erro = '')
     
 
 @app.route("/register", methods=['GET','POST'])
 def Reg():
     
     my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
-    DB = my_firebase.get_sync(point="/Dicionário Geral")
-    
+    DB = eval(my_firebase.get_sync(point="/Dicionário Geral"))
+    print(DB)
     if request.method == 'POST':
         
         email = request.form['Email']
@@ -84,19 +84,28 @@ def home():
     return render_template("Homepage.html", erro = '')
 
 @app.route('/alugar') #endereço para alugar um carro (I)
+def alugar():
+    return render_template("alugar.html", erro ='')
 
 @app.route('/alugar/modelo') # (II) escolha do modelo de carro
-
+def modelo():
+    return render_template("modelo.html", erro = '')
+    
 @app.route('/alugar/tabela') # (III) escolher um dos carros dentre os da tabela 
-
+def tabela(): 
+    return render_template("tabela.html", erro='')
+    
 @app.route('/alugar/anúncio') # (IV) página do anúncio com opções de barganhar ou alugar
-
+def anuncio():
+    return render_template("anuncio.html", erro='')
+    
 @app.route('/alugar/barganha') #(V) opção de dar um lance de barganha 
-
+def barganha():
+    return render_template("barganha.html", erro='')
 
 @app.route('/anunciar')
 def anunciar():
-    return render_template ('anunciar.html')
+    return render_template ('anunciar.html', erro='')
     
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)

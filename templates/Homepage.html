@@ -11,20 +11,50 @@
 <script type="text/javascript" src="./js/kickstart.js"></script>                                  <!-- KICKSTART -->
 </head>
 <body>
-
-<div class="col_1"></div>
-	<div class="col_10">
-		<ul class="tabs left">
-		<li><a href="Tela_Inicial">Homepage</a></li>
-            </ul> 
-
 		<div id="Homepage" class="tab-content">
 			<div class="grid">
 
-				<div class="col_2"></div>
+				<div class="col_4">
+                        
+                    	<div id="Dados_Listados" class="tab-content">
+			
+				
+
+				    
+					{% if erro != '': %}
+						<div class="notice error"><i class="icon-remove-sign icon-large"></i> {{ erro }} 
+						<a href="#close" class="icon-remove"></a></div>
+					{% endif %} 
+
+					<p><strong>Dados Listados</strong></p>
+
+					
+					<table class="sortable striped">
+						<thead><tr>
+							<th>Usuário</th>
+							<th>Carros Anunciados</th>
+							<th></th>
+						</tr></thead>
+						<tbody>
+						  
+							{% for e in dic: %}
+							<tr>
+								<td>{{ dic[e].Usuário }}</td>
+								<td>{{ dic[e].Carros Anunciados }}</td>
+							
+
+								
+								<td><a href="./del?placa={{ e }}"><i class="fa fa-trash"></i></a></td>
+							</tr>
+							{% endfor %}
+						</tbody>
+					</table>
+				</div>
+		
+                    </div>
 				<div class="col_8">
 				  
-					<form class="vertical" method="POST" action="./#Alugar_I">
+					<form class="vertical" method="POST" action="./Alugar">
 					<fieldset>
 						<legend>Homepage</legend>
 					
@@ -43,11 +73,17 @@
 					</fieldset>
 					</form>
 				</div>
-				<div class="col_2"></div>
 			</div>
 		</div>
 
 	</div>
+
+
+<div class="clear"></div>
+<div id="footer">
+&copy; Copyright 2016 All Rights Reserved. This website was built with <a href="http://www.99lime.com">HTML KickStart</a>
+</div>
+
 
 </body>
 </html>

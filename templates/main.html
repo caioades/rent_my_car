@@ -11,18 +11,45 @@
 <script type="text/javascript" src="./js/kickstart.js"></script>                                  <!-- KICKSTART -->
 </head>
 <body>
-<div id="header"></div>
 
-<div class="grid">
+		<div id="Tela_Inicial" class="tab-content">
+			<div class="grid">
 
-	<div class="col_4">
-		<h3><i class="fa fa-car"></i> <i class="fa fa-truck"></i> Aluguel de Carros </h3>
+				<div class="col_2"></div>
+				<div class="col_8">
+                       <a href="/register" />
+				 <button class="medium"><i class="fa fa-car"></i>Sign In</button>
+                       </a>
+					<form class="vertical" method="POST" action="./Homepage">
+					<fieldset>
+						<legend>Tela Inicial</legend>
+					
+						<div class="grid">
+
+							<div class="col_6">
+							<label for="login">Login</label>
+							<input id="login" name="login" type="text" />
+							</div>
+
+							<div class="col_6">
+							<label for="senha">Senha</label>
+							<input id="senha" name="senha" type="text" />
+							</div>
+
+							<div class="col_12 right">
+                                       <a href="/Homepage" />
+							<button class="medium"><i class="fa fa-car"></i>Entrar</button>
+                                       </a>
+							</div>
+						</div>
+					</fieldset>
+					</form>
+				</div>
+				<div class="col_2"></div>
+                       
+			</div>
+
 	</div>
 
-<div class="col_1"></div>
-	<div class="col_10">
-		<ul class="tabs left">
-		<li><a href="Tela_Inicial">Tela Inicial</a></li>
-            </ul> 
-</body>         
+</body>
 </html>
