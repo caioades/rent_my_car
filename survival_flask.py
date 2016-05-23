@@ -6,9 +6,54 @@ DAY 0
 @author: caioades
 """
 
+
+import firecall
+my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
+
+class Usuario():
+	
+	def __init__ (self, email, nome_completo, endereco, cep, cpf, nickname, senha):
+		self.email = email
+		self.nome_completo = nome_completo
+		self.endereco = endereco
+		self.cep = cep
+		self.cpf = cpf
+		self.nickname = nickname
+		self.senha = senha
+		self.dicio_carros_anunciados = {}
+		self.dicio_carros_alugados = {}
+		self.dicio_usuarios = {}
+		
+	
+	def anunciar_carro (self, fabricante, modelo, ano, cor, blindagem):
+		self.carro_anunciado = Veiculo(fabricante, modelo, ano, cor, blindagem)
+		self.dicio_carros_anunciados[self.nickname] = self.carro_anunciado		
+	
+	def alugar_carro (self, fabricante, modelo, ano, cor, blindagem):
+		self.carro_alugado = Veiculo(fabricante, modelo, ano, cor, blindagem)
+		self.dicio_carros_alugados[self.nickname] = self.carro_alugado				
+
+	def salvar (self):
+           DU = {}
+           DU[self.usuario] = self.email, self.nome_completo,self.endereco,self.cep, self.cpf,self.nickname,self.senha,self.dicio_carros_anunciados,self.dicio_carros_alugados   
+           my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
+           my_firebase.put_sync(point="/Dados do usuário/{0}".format(self.nickname), data=DU)
+		
+		
+
+class Veiculo():
+	
+	def __init__(self, fabricante, modelo, ano, cor, blindagem):
+		self.fabricante = fabricante
+		self.modelo = modelo
+		self.ano = ano
+		self.cor = cor
+		self.blindagem = blindagem
+
+
+
 from flask import Flask, render_template, request, redirect, url_for
 
-from classes import Usuario, Veiculo
 
 import firecall
 
@@ -49,13 +94,13 @@ def Reg():
     print(DB)
     if request.method == 'POST':
         
-        email = request.form['Email']
         nome_completo = request.form['Nome Completo']
+        email = request.form['Email']
         endereco = request.form['Endereço']
-        cep = request.form['CEP']
         cpf = request.form['CPF']
         nickname = request.form['Usuário']
         senha = request.form['Senha']
+        cep = request.form['CEP']
         
         
         #Veiculos[nickname] = Usuario(email, nome_completo, endereco, cep, cpf, nickname, senha)
@@ -79,7 +124,7 @@ def Reg():
     return render_template('register.html', dic = DB, erro = '')
 
 
-@app.route('/home')
+@app.route('/Homepage')
 def home():
     return render_template("Homepage.html", erro = '')
 
@@ -89,6 +134,9 @@ def alugar():
 
 @app.route('/alugar/modelo') # (II) escolha do modelo de carro
 def modelo():
+    
+    modelo = request.args['Modelo']
+    
     return render_template("modelo.html", erro = '')
     
 @app.route('/alugar/tabela') # (III) escolher um dos carros dentre os da tabela 
@@ -101,10 +149,17 @@ def anuncio():
     
 @app.route('/alugar/barganha') #(V) opção de dar um lance de barganha 
 def barganha():
+    preco = request.forms['Faça um Lance']
     return render_template("barganha.html", erro='')
 
 @app.route('/anunciar')
 def anunciar():
+    fabricante = request.args['Fabricante']
+    modelo = request.args['Modelo']
+    ano = request.args['Ano']
+    #aluguel diario/mensal/semanal
+    
+    
     return render_template ('anunciar.html', erro='')
     
 if __name__ == "__main__":
