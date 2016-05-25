@@ -90,25 +90,33 @@ def LogIn(): #mainpage - pagina login e senha
 def Reg():
     
     my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
-    DG = eval(my_firebase.get_sync(point="/Dicionário Geral"))
-    print(DG)
+    DG = my_firebase.get_sync(point="/Dicionário Geral")
+    if DG == b'null':
+        DG = {}
+    else:
+        DG = eval(DG)
+    
+    
+				
     if request.method == 'POST':
         
-        nome_completo = request.form['Nome Completo']
-        email = request.form['Email']
-        endereco = request.form['Endereço']
-        cpf = request.form['CPF']
-        nickname = request.form['Usuário']
+        nome_completo = request.form['nome']
+        email = request.form['email']
+        endereco = request.form['endereco']
+        cpf = request.form['cpf']
+        nickname = request.form['usuário']
+	  
+        print("A")
         for e in DG:
             if e == nickname:
                 e = 'Esse nome de usuário já existe! Por favor, digite outro' 
                 return render_template('register.html', dic = DG, erro = e)
-        senha = request.form['Senha']
+        senha = request.form['senha']
         for f in DG: 
             if DG[f][7] == senha:
                 s = 'Esta senha já existe! Por favor, digite outra'
                 return render_template('register.html', dic = DG, erro = s)
-        cep = request.form['CEP']
+        cep = request.form['cep']
         
         DG[nickname]=[email, nome_completo, endereco, cep, cpf, nickname, senha] #devo criar objeto da classe Usuario para salvar, ou crio quando importo esses dados? 
         my_firebase.put_sync(point="/Dicionário Geral", data=DG)
