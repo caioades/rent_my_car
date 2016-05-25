@@ -49,7 +49,7 @@ class Veiculo():
 		self.ano = ano
 		self.cor = cor
 		self.blindagem = blindagem
-
+  
 
 
 from flask import Flask, render_template, request, redirect, url_for
@@ -147,20 +147,24 @@ def tabela():
 def anuncio():
     return render_template("anuncio.html", erro='')
     
-@app.route('/alugar/barganha') #(V) opção de dar um lance de barganha 
+@app.route('/alugar/renegociar') #(V) opção de dar um lance de barganha 
 def barganha():
     preco = request.forms['Faça um Lance']
-    return render_template("barganha.html", erro='')
+    return render_template("renegociar.html", erro='')
 
 @app.route('/anunciar')
 def anunciar():
     fabricante = request.args['Fabricante']
     modelo = request.args['Modelo']
     ano = request.args['Ano']
+    cor = request.args['Cor']
+    
+    veiculo = Veiculo(fabricante, modelo, ano, cor, blindagem)
+    
     #aluguel diario/mensal/semanal
     
     
-    return render_template ('anunciar.html', erro='')
+    return render_template ('anunciar.html', dic = DB,  erro='')
     
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)

@@ -11,4 +11,9 @@ my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com")
 
 DG = {"usuario" : "infos" }
 
-my_firebase.put(point="/Dicionário Geral", data=DG)
+my_firebase.put_sync(point="/Dicionário Geral", data=DG)
+
+DC = {"usuario" : {"veiculo":["fabricante","modelo","ano","cor"]}}
+
+my_firebase.put_sync(point="/Dicionário de Carros", data=DC)
+
