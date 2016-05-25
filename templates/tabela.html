@@ -21,7 +21,7 @@
 						<a href="#close" class="icon-remove"></a></div>
 					{% endif %} 
 
-					<p><strong>Lista atual de veículos</strong></p>
+					<p><strong>Lista Atual de Veículos</strong></p>
 
 					
 					<table class="sortable striped">
@@ -29,7 +29,7 @@
 							<th>Modelo</th>
 							<th>Ano</th>
 							<th>Cor</th>
-                                       <th>Anunciador</th>
+                                       <th>Usuário</th>
 						</tr></thead>
 						<tbody>
 						   
@@ -38,7 +38,7 @@
 								<td>{{ dic[e].Modelo }}</td>
 								<td>{{ dic[e].Ano }}</td>
 								<td>{{ dic[e].Cor }}</td>
-								<td>{{ dic[e].Anunciador }}</td>
+								<td>{{ dic[e].Usuário }}</td>
 
 								<td><a href="./del?placa={{ e }}"><i class="fa fa-trash"></i></a></td>
 							</tr>

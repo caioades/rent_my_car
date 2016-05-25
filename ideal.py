@@ -114,12 +114,20 @@ def Reg():
         my_firebase.put_sync(point="/Dicionário Geral", data=DG)
         
         
-    return render_template('register.html', dic = DG, erro = '')
+    return render_template('register.html', erro = '')
 
 
-@app.route('/Homepage')
-def home():
-    return render_template("Homepage.html", erro = '')
+@app.route('/Homepage/<usuario>')
+def home(usuario):
+    my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
+    DG = eval(my_firebase.get_sync(point="/Dicionário Geral"))
+    DC_alugados = eval(my_firebase.get_sync(point="/Dicionário de Carros Alugados"))
+    DC_anunciados = eval(my_firebase.get_sync(point="/Dicionário de Carros Anunciados"))
+    lances = eval(my_firebase.get_sync(point="/Dicionário de Renegociações"))
+    #listagem de veiculos do usuário:
+    
+
+    return render_template("Homepage.html", usuarios=DG, anunciados=DC_anunciados, alugados=DC_alugados, lances=lances, erro = '')
 
 @app.route('/Alugar') #endereço para alugar um carro (I)
 def alugar():
