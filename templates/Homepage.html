@@ -11,67 +11,55 @@
 <script type="text/javascript" src= "{{ url_for('static',filename='js/kickstart.js') }}"></script>                                  <!-- KICKSTART -->
 </head>
 <body>
-		<div id="Homepage" class="tab-content">
-			<div class="grid">
-
-				<div class="col_4">
-                        
-                    	<div id="Dados_Listados" class="tab-content">
+		<!-- 2 -->
 			
-				
+				<div class="col_1"></div>
+                    	<div class="col_10"> 
+                    		<ul class="tabs left">
+                    		<li><a href="#tabr1">Início</a></li>
+                    		<li><a href="#tabr2">Usuário</a></li>
+                    		</ul>
 
-				    
-					{% if erro != '': %}
-						<div class="notice error"><i class="icon-remove-sign icon-large"></i> {{ erro }} 
-						<a href="#close" class="icon-remove"></a></div>
-					{% endif %} 
+                <div id="tabr1" class="tab-content">
+			   <div class="grid">
+				<div class="col_12">		
 
-					<p><strong>Dados Listados</strong></p>
+                            <p><strong>Início</strong></p>		    
 
+<!-- 1 --><a> Olá {{usuario}}</a>
 					
-					<table class="sortable striped">
-						<thead><tr>
-							<th>Usuário</th>
-							<th>Carros Anunciados</th>
-							<th></th>
-						</tr></thead>
-						<tbody>
-						  
-							{% for e in dic: %}
-							<tr>
-								<td>{{ dic1[e]["Usuário"] }}</td>
-								<td>{{ dic2[e]["Carros_Anunciados"] }}</td>
-							
+                <div class="grid">
+				<div class="col_12 right">
+                               <a href="/alugar" />
+					   <button class="medium"><i class="fa fa-car"></i>Alugar Carros</button>
+                               </a>
+                               <a href="/anunciar" />
+                               <button class="medium"><i class="fa fa-car"></i>Anunciar Carros</button>
+                               </a>
 
-								
-								<td><a href="./del?placa={{ e }}"><i class="fa fa-trash"></i></a></td>
-							</tr>
-							{% endfor %}
-						</tbody>
-					</table>
-				</div>
-		
-                    </div>
-				<div class="col_8">
-				  
-					<form class="vertical" method="POST" action="./Alugar">
-					<fieldset>
-						<legend>Homepage</legend>
-					
-						<div class="grid">
+</div>
+</div>
+</div>
+<div id="tabr2" class="tab-content">
+      <div class="grid">
+	<div class="col_12">
 
-							
-							<div class="col_12 right">
-                                       <a href="/Alugar.html" />
-							<button class="medium"><i class="fa fa-car"></i>Alugar Carros</button>
-                                       </a>
-                                       <a href="/Anunciar.html" />
-                                       <button class="medium"><i class="fa fa-car"></i>Anunciar Carros</button>
-                                       </a>
-							</div>
+	  <div class="grid">
+				<div class="col_12 right">
+                               <a href="/alugar" />
+					   <button class="medium"><i class="fa fa-car"></i>Alugar Carros</button>
+                               </a>
+                               <a href="/anunciar" />
+                               <button class="medium"><i class="fa fa-car"></i>Anunciar Carros</button>
+                               </a>
+
+
+
+                        </div>
+
+</div>
 						</div>
-					</fieldset>
-					</form>
+					</div>
 				</div>
 			</div>
 		</div>

@@ -17,30 +17,48 @@
 
 				<div class="col_2"></div>
 				<div class="col_8">
-                       <a href="/register" />
+                       <a href="/register/" /> 
 				 <button class="medium"><i class="fa fa-car"></i>Sign In</button>
                        </a>
-					<form class="vertical" method="POST" action="./Homepage">
+					<form class="vertical" method="POST" action="/Homepage">
 					<fieldset>
+
 						<legend>Tela Inicial</legend>
 					
 						<div class="grid">
 
 							<div class="col_6">
-							<label for="login">Login</label>
-							<input id="login" name="login" type="text" />
+							<label for="usuario">Usuário</label>
+							<input id="usuario" name="usuario" type="text" />
 							</div>
+
+                            {% if erro != '': %}
+						<div class="notice error"><i class="icon-remove-sign icon-large"></i> 
+                            {{ erro }} 
+						<a href="#close" class="icon-remove"></a></div>
+					{% endif %}
+
 
 							<div class="col_6">
 							<label for="senha">Senha</label>
 							<input id="senha" name="senha" type="text" />
 							</div>
 
+                            {% if erro != '': %}
+						<div class="notice error"><i class="icon-remove-sign icon-large"></i> 
+                            {{ erro }} 
+						<a href="#close" class="icon-remove"></a></div>
+					{% endif %}
+
+
+
 							<div class="col_12 right">
-                                       <a href="/Homepage" />
 							<button class="medium"><i class="fa fa-car"></i>Entrar</button>
-                                       </a>
 							</div>
+
+                            
+
+
 						</div>
 					</fieldset>
 					</form>
