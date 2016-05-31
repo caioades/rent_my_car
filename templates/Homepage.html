@@ -30,16 +30,20 @@
 					
                 <div class="grid">
 				<div class="col_12 right">
-                               <a href="/alugar" />
+                               <a href="/alugar?usuario={{usuario}}" />
 					   <button class="medium"><i class="fa fa-car"></i>Alugar Carros</button>
                                </a>
-                               <a href="/anunciar" />
+                               <a href="/anunciar?usuario={{usuario}}" />
                                <button class="medium"><i class="fa fa-car"></i>Anunciar Carros</button>
                                </a>
 
 </div>
 </div>
 </div>
+
+
+
+<!--criar 2 tabs-->
 <div id="tabr2" class="tab-content">
       <div class="grid">
 	<div class="col_12">
@@ -52,6 +56,29 @@
                                <a href="/anunciar" />
                                <button class="medium"><i class="fa fa-car"></i>Anunciar Carros</button>
                                </a>
+
+{%for e in usuarios: %}
+<div class="grid"> <p><strong>Dados do Usuário</strong></p>	
+<li>Usuário: {{e}}  </li> 
+<li>Email: {{usuarios[e][0]}}  </li> 
+<li>Nome Completo: {{usuarios[e][1]}}  </li> 
+<li>Endereço: {{usuarios[e][2]}}  </li>
+<li>CEP: {{usuarios[e][3]}}  </li>
+<li>CPF: {{usuarios[e][4]}}  </li>
+{%endfor%}
+
+<p><strong>Carros Anunciados </strong></p>	
+{%for k in anunciados[usuario]:%}
+<li>Carro: {{anunciados[usuario][k][0]}}/{{anunciados[usuario][k][1]}} </li> 
+<li>Ano: {{anunciados[usuario][k][2]}}</li> 
+<li>Cor: {{anunciados[usuario][k][3]}} </li>
+<p><strong>Lances </strong></p>
+{%endfor%}
+
+
+
+</div>
+
 
 
 

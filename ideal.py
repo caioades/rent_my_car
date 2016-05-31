@@ -52,7 +52,7 @@ class Veiculo():
   
 
 
-from flask import Flask, render_template, request, redirect, url_for, session
+from flask import Flask, render_template, request, redirect, url_for
 
 
 import firecall
@@ -69,27 +69,29 @@ def LogIn(): #mainpage - pagina login e senha
     #importar DG do firebase (GET)
     my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
     DG = eval(my_firebase.get_sync(point="/Dicionário Geral"))
+    usuario=''
     
     if request.method == 'POST':
         
         usuario = request.form['usuario']
+        print("OLHA O USUARIO!!!!!!!!!!!!", usuario)
         
         senha = request.form['senha']
         
-        return redirect(url_for('home'))
+        return redirect(url_for('home', usuario=usuario))
         
         
-        '''if session['usuario'] in DG:
-            if DG[session['usuario']][6] == senha:
-                return redirect(url_for('Homepage',session=session))
+        if usuario in DG:
+            if DG[usuario][6] == senha:
+                return redirect(url_for('Homepage',usuario=usuario))
             else: 
                 s = 'Usuário ou senha inexistente!' #Mensagem de erro
-                return redirect(url_for('main.html', dic = DG, erro = s))
+                return redirect(url_for('LogIn', dic = DG,usuario=usuario, erro = s))
         else:
             e = 'Usuário ou senha inexistente!' #Mensagem de erro
-            return redirect(url_for('main.html', dic = DG, erro = e))'''
+            return redirect(url_for('LogIn', dic = DG,usuario=usuario, erro = e))
     
-    return render_template('main.html', dic = DG, erro = '')
+    return render_template('main.html', dic = DG, usuario=usuario, erro = '')
     
 
 @app.route("/register/", methods=['GET','POST'])
@@ -126,46 +128,64 @@ def Reg():
         
         return redirect(url_for('LogIn'))
         
-    return render_template('register.html', dic = DG, session=session, erro = '')
+    return render_template('register.html', dic = DG, erro = '')
 
 
 @app.route('/Homepage',methods=['GET','POST'])
 def home():
-    
-    '''my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
-    DG = eval(my_firebase.get_sync(point="/Dicionário Geral"))
-    if DG == b'null':
-        DG = {}
-    else:
-        DG = eval(DG)
-    print(DG)
+    usuario = request.form['usuario']
+    print("OLHA O USUARIO!!!!!!!!!!!!", usuario)
+   
         
-    DC_alugados = eval(my_firebase.get_sync(point="/Dicionário de Carros Alugados"))
-    if DC_alugados == b'null':
-        DC_alugados = {}
-    else:
-        DC_alugados = eval(DC_alugados)
-    print(DC_alugados)
-        
-    DC_anunciados = eval(my_firebase.get_sync(point="/Dicionário de Carros Anunciados"))
+    DC_anunciados = my_firebase.get_sync(point="/Dicionário de Carros")
     if DC_anunciados == b'null':
         DC_anunciados = {}
     else:
         DC_anunciados = eval(DC_anunciados)
-    print(DC_anunciados)
     
-    lances = eval(my_firebase.get_sync(point="/Dicionário de Renegociações"))
+    
+    lances = my_firebase.get_sync(point="/Registro de Renegociações")
     if lances == b'null':
         lances = {}
     else:
         lances = eval(lances)
-    print(lances)'''
+    
 
     #listagem de veiculos do usuário:
     #,usuarios=DG, anunciados=DC_anunciados, alugados=DC_alugados, lances=lances,
     
-    return render_template("Homepage.html", erro = '')
+    return render_template("Homepage.html", anunciados=DC_anunciados, lances=lances, erro = '')
     
+    
+@app.route('/Homepage/perfil')
+def perfil(): 
+    import firecall 
+    usuario = request.args['usuario']       
+    
+    my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
+    DG = my_firebase.get_sync(point="/Dicionário Geral")
+    if DG == b'null':
+        print(DG)
+        DG = {}
+    else:
+        DG = eval(DG)
+    print("DG:",DG)
+        
+    DC_alugados = my_firebase.get_sync(point="/Dicionário de Carros Alugados")
+    if DC_alugados == b'null':
+        DC_alugados = {}
+    else:
+        DC_alugados = eval(DC_alugados)
+    print("alugados:",DC_alugados)
+    
+    lances = my_firebase.get_sync(point="/Registro de Renegociações")
+    if lances == b'null':
+        lances = {}
+    else:
+        lances = eval(lances)
+    print("lances:", lances)
+    
+    return render_template("perfil.html",usuarios=DG,alugados=DC_alugados,usuario=usuario, erro='')
     
 
 @app.route('/alugar',methods=['GET','POST']) #endereço para alugar um carro (I)

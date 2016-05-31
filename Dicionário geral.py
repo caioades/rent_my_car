@@ -15,7 +15,7 @@ my_firebase.put_sync(point="/Dicionário Geral", data=DG)
 
 
 
-DC_anunciados = {"usuario" : [{"veiculo":["fabricante","modelo","ano","cor"]},{"veiculo":["fabricante","modelo","ano","cor"]}]}
+DC_anunciados = {"usuario" : [{"veiculo":["fabricante","modelo","ano","cor","S"]},{"veiculo":["fabricante","modelo","ano","cor","N"]}]}
 
 my_firebase.put_sync(point="/Dicionário de Carros Alugados", data=DC_anunciados)
 
