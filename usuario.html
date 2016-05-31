@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html><head>
+<title>Aluguel de Carros</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<meta name="description" content="" />
+<meta name="copyright" content="" />
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='css/kickstart.css') }}" media="all" />                  <!-- KICKSTART -->
+<link rel="stylesheet" type="text/css" href= "{{ url_for('static',filename='style.css') }}" media="all" />                          <!-- CUSTOM STYLES -->
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script type="text/javascript" src= "{{ url_for('static',filename='js/kickstart.js') }}"></script>                                  <!-- KICKSTART -->
+</head>
+<body>
+<!--criar 2 tabs-->
+<div id="usuario" class="tab-content">
+      <div class="grid">
+	<div class="col_12">
+
+	  <div class="grid">
+				<div class="col_12 left">
+                               <a href="/alugar" />
+					   <button class="medium"><i class="fa fa-car"></i>Alugar Carros</button>
+                               </a>
+                               <a href="/anunciar" />
+                               <button class="medium"><i class="fa fa-car"></i>Anunciar Carros</button>
+                               </a>
+                               <a href="/Homepage" />
+                               <button class="medium"><i class="fa fa-car"></i>Início</button>
+                               </a>
+
+{%for e in usuarios: %}
+<div class="grid"> <p><strong>Dados do Usuário</strong></p>	
+<li>Usuário: {{e}}  </li> 
+<li>Email: {{usuarios[e][0]}}  </li> 
+<li>Nome Completo: {{usuarios[e][1]}}  </li> 
+<li>Endereço: {{usuarios[e][2]}}  </li>
+<li>CEP: {{usuarios[e][3]}}  </li>
+<li>CPF: {{usuarios[e][4]}}  </li>
+{%endfor%}
+
+<p><strong>Carros Anunciados </strong></p>	
+{%for k in anunciados[usuario]:%}
+<li>Carro: {{anunciados[usuario][k][0]}}/{{anunciados[usuario][k][1]}} </li> 
+<li>Ano: {{anunciados[usuario][k][2]}}</li> 
+<li>Cor: {{anunciados[usuario][k][3]}} </li>
+<p><strong>Lances </strong></p>
+{%endfor%}
+
+
+
+</div>
+
+
+
+
+                        </div>
+
+</div>
+						</div>
+					</div>
+				</div>
+
+
+
+<div class="clear"></div>
+<div id="footer">
+&copy; Copyright 2016 All Rights Reserved. This website was built with <a href="http://www.99lime.com">HTML KickStart</a>
+</div>
+
+
+</body>
+</html>
