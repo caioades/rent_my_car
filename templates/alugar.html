@@ -17,21 +17,21 @@
 				<div class="col_2"></div>
 				<div class="col_8">
 				    
-					<form class="vertical" method="POST" action="./alugar/modelo">
+					<form class="vertical" method="POST" action="/alugar/modelo?usuario={{usuario}}&periodo={{periodo}}">
 					<fieldset>
 						<legend>Escolha o Período de Locação</legend>
 
                                  <div>
-                                   <input type="checkbox" id="check1" />
-                                   <label for="check1" class="inline">Aluguel Diário</label>  
+                                   <input type="checkbox" id="diario" />
+                                   <label for="diario" class="inline">Aluguel Diário</label>  
                                 </div>
                                 <div>          
-            				  <input type="checkbox" id="check1" />
-                                   <label for="check1" class="inline">Aluguel Semanal</label>
+            				  <input type="checkbox" id="semanal" />
+                                   <label for="semanal" class="inline">Aluguel Semanal</label>
                                 </div>
                                 <div>
-                                   <input type="checkbox" id="check1" />
-                                   <label for="check1" class="inline">Aluguel Mensal</label>
+                                   <input type="checkbox" id="mensal" />
+                                   <label for="mensal" class="inline">Aluguel Mensal</label>
                                  </div>
   
                                        <div class="col_12 right">
