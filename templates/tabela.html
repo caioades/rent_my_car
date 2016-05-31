@@ -33,12 +33,17 @@
 						</tr></thead>
 						<tbody>
 						   
-							{% for e in dic: %}
+							{% for usuario in anunciados: %}
+                                            {%for i in anunciados[usuario]%}
+                                                {%for veiculo in anunciados[usuario][i]%}
 							<tr>
-								<td>{{ dic[e].Modelo }}</td>
-								<td>{{ dic[e].Ano }}</td>
-								<td>{{ dic[e].Cor }}</td>
-								<td>{{ dic[e].Usuário }}</td>
+                               <td> <a href="/anunciar/anuncio?usuario={{usuario}}" />
+					   <button class="medium"><i class="fa fa-car"></i></button>
+                               </a></td>
+								<td> {{anunciados[usuario][i][veiculo]}} </td>
+								<td>{{ anunciados[usuario][i][veiculo][2] }}</td>
+								<td>{{ anunciados[usuario][i][veiculo][3] }}</td>
+								<td>{{ usuario }}</td>
 
 								<td><a href="./del?placa={{ e }}"><i class="fa fa-trash"></i></a></td>
 							</tr>

@@ -144,17 +144,7 @@ def home():
         DC_anunciados = eval(DC_anunciados)
     
     
-    lances = my_firebase.get_sync(point="/Registro de Renegociações")
-    if lances == b'null':
-        lances = {}
-    else:
-        lances = eval(lances)
-    
-
-    #listagem de veiculos do usuário:
-    #,usuarios=DG, anunciados=DC_anunciados, alugados=DC_alugados, lances=lances,
-    
-    return render_template("Homepage.html", anunciados=DC_anunciados, lances=lances, erro = '')
+    return render_template("Homepage.html", anunciados=DC_anunciados,usuario=usuario, erro = '')
     
     
 @app.route('/Homepage/perfil')
@@ -185,35 +175,67 @@ def perfil():
         lances = eval(lances)
     print("lances:", lances)
     
-    return render_template("perfil.html",usuarios=DG,alugados=DC_alugados,usuario=usuario, erro='')
+    DC_anunciados = my_firebase.get_sync(point="/Dicionário de Carros")
+    if DC_anunciados == b'null':
+        DC_anunciados = {}
+    else:
+        DC_anunciados = eval(DC_anunciados)
     
+    return render_template("usuario.html",usuarios=DG,anunciados=DC_anunciados,alugados=DC_alugados,usuario=usuario, erro='')
+    
+
+
 
 @app.route('/alugar',methods=['GET','POST']) #endereço para alugar um carro (I)
 def alugar():
-    return render_template("alugar.html", erro ='')
+    usuario = request.args['usuario']   
+
+    DC_anunciados = my_firebase.get_sync(point="/Dicionário de Carros")
+    if DC_anunciados == b'null':
+        DC_anunciados = {}
+    else:
+        DC_anunciados = eval(DC_anunciados)  
+
+    return render_template("alugar.html",anunciados=DC_anunciados,usuario=usuario, erro ='')
+
 
 @app.route('/alugar/modelo',methods=['GET','POST']) # (II) escolha do modelo de carro
 def modelo():
+    usuario = request.args['usuario']
     
-    modelo = request.args['Modelo']
+    modelo = request.form['Modelo']
     
-    return render_template("modelo.html", erro = '')
+    return render_template("modelo.html",usuario=usuario, erro = '')
+    
     
 @app.route('/alugar/tabela',methods=['GET','POST']) # (III) escolher um dos carros dentre os da tabela 
 def tabela(): 
-    return render_template("tabela.html", erro='')
+    
+    usuario = request.args['usuario']  
+     
+    return render_template("tabela.html",usuario=usuario, erro='')
+    
     
 @app.route('/alugar/anúncio',methods=['GET','POST']) # (IV) página do anúncio com opções de barganhar ou alugar
 def anuncio():
-    return render_template("anuncio.html", erro='')
+    
+    usuario = request.args['usuario']  
+     
+    return render_template("anuncio.html",usuario=usuario, erro='')
+    
     
 @app.route('/alugar/renegociar',methods=['GET','POST']) #(V) opção de dar um lance de barganha 
 def barganha():
+    usuario = request.args['usuario']
+    
     preco = request.forms['Faça um Lance']
-    return render_template("renegociar.html", erro='')
+    
+    return render_template("renegociar.html",usuario=usuario, erro='')
+
 
 @app.route('/anunciar',methods=['GET','POST'])
 def anunciar():
+    usuario = request.args['usuario']       
     '''fabricante = request.args['Fabricante']
     modelo = request.args['Modelo']
     ano = request.args['Ano']
@@ -226,7 +248,7 @@ def anunciar():
     #aluguel diario/mensal/semanal'''
     
     
-    return render_template ('anunciar.html',  erro='')
+    return render_template ('anunciar.html',usuario=usuario,  erro='')
     
 if __name__ == "__main__":
     app.run(debug=True, use_reloader=True)
