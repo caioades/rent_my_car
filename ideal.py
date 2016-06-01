@@ -262,9 +262,11 @@ def modelo():
 @app.route('/alugar/tabela',methods=['GET','POST']) # (III) escolher um dos carros dentre os da tabela 
 def tabela(): 
     
+    modelos = my_firebase.get_sync(point="/Modelos dos carros")
+    
     usuario = request.args['usuario']  
      
-    return render_template("tabela.html",usuario=usuario, erro='')
+    return render_template("tabela.html",usuario=usuario, modelos=modelos, erro='')
     
     
 
@@ -288,7 +290,7 @@ def barganha():
     
     preco = request.forms['preco']
     
-    return render_template("renegociar.html",usuario=usuario,preco=preco, erro='')
+    return render_template("renegociar.html",usuario=usuario, preco=preco, erro='')
 
 
 
@@ -352,13 +354,14 @@ def submit():
             blindagem = request.form['blindagem'] 
             periodo = request.form['periodo']
             preco = request.form['preco']
-
+     
             print([fabricante,modelo,ano,cor,blindagem,periodo,preco])
             return render_template("submit.html", usuario=usuario, fabricante=fabricante, modelo=modelo, ano=ano, cor=cor,blindagem=blindagem, periodo=periodo, preco=preco)
+        
         except: 
-            e = "Por favor, verifique se os dados foram cadastrados corretamente"
-            return render_template('anunciar.html',usuario=usuario, erro=e)
-                
+            '''e = "Por favor, verifique se os dados foram cadastrados corretamente"
+            return render_template('anunciar.html',usuario=usuario, erro=e)'''
+            return render_template("submit.html", usuario=usuario)
         
         #DC_anunciados[usuario].append({modelo:[fabricante,modelo,ano,cor,blindagem,periodo,preco]})
         #my_firebase.put_sync(point="/Dicionário de Carros Alugados", data=DC_anunciados)

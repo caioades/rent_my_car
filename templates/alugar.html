@@ -23,35 +23,27 @@
 
 				<div class="col_2 left"></div>
                             
-                         <a href="/Homepage?usuario={{usuario}}" />
-                               <button class="medium"><i class="fa fa-car"></i>Início</button>
-                               </a>
+            
 
 				<div class="col_8">
 				    
-					<form class="vertical" method="POST" action="./alugar/modelo">
+					<form class="vertical" method="POST" action="/alugar/modelo?usuario={{usuario}}">
 					<fieldset>
 						<legend>Escolha o Período de Locação</legend>
 
-                                 <div>
-                                   <input type="checkbox" id="check1" />
-                                   <label for="check1" class="inline">Aluguel Diário</label>  
-                                </div>
-                                <div>          
-            				  <input type="checkbox" id="check1" />
-                                   <label for="check1" class="inline">Aluguel Semanal</label>
-                                </div>
-                                <div>
-                                   <input type="checkbox" id="check1" />
-                                   <label for="check1" class="inline">Aluguel Mensal</label>
-                                 </div>
-  
+                                 <input type="radio" name="periodo" value="dia"> Aluguel Diário<br>
+                                 <input type="radio" name="periodo" value="semana"> Aluguel Semanal<br>
+                                 <input type="radio" name="periodo" value="mes"> Aluguel Mensal  
                                        <div class="col_12 right">
 							<button class="medium"><i class="fa fa-car"></i>Procurar</button>
 							</div>
 
 					</fieldset>
 					</form>
+                               <a href="/Homepage?usuario={{usuario}}" />
+                               <button class="medium"><i class="fa fa-car"></i>Início</button>
+                               </a>
+
 				</div>
 				<div class="col_2"></div>
 			</div>
