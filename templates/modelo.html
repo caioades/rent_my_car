@@ -15,10 +15,22 @@
 		<div id="modelo" class="tab-content">
 			<div class="grid">
 
-				<div class="col_2"></div>
+                    
+					{% if erro != '': %}
+						<div class="notice error"><i class="icon-remove-sign icon-large"></i> 
+                            {{ erro }} 
+						<a href="#close" class="icon-remove"></a></div>
+					{% endif %} 
+
+				<div class="col_2 left"></div>
+
+                    <a href="/Homepage?usuario={{usuario}}" />
+                               <button class="medium"><i class="fa fa-car"></i>Início</button>
+                               </a>
+
 				<div class="col_8">
 				  
-					<form class="vertical" method="POST" action="/alugar/tabela?usuario={{usuario}}">
+					<form class="vertical" method="POST" action="./alugar/tabela">
 					<fieldset>
 						<legend>Escolha Do Modelo</legend>
 					
