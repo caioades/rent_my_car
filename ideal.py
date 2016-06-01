@@ -68,38 +68,6 @@ app.secret_key='\xd0\xe2\xef\xbdq~\x99\xe9\xe7Z\x13i\x87Vlx0q5n\x14\x10D\xb7'
 @app.route("/", methods=['GET','POST']) #decorator '@' - no caso, uma objeto da classe Flask, com o método .route() 
 def LogIn(): #mainpage - pagina login e senha/ register
     
-    #importar DG do firebase (GET)
-    #my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
-    #DG = eval(my_firebase.get_sync(point="/Dicionário Geral"))
-    #usuario='oi' 
-    
-    print("OLHA EU AQUI")
-   
-    #if request.method == 'POST':
-        
-    # usuario = request.args['usuario']
-    #print("OLHA O USUARIO!!!!!!!!!!!!", usuario)
-    #senha = request.args['senha']
-    
-    #return redirect(url_for('home', usuario=usuario, senha=senha))
-    
-    #mensagem de erro para a pagina register:
-    ''' for k in DG:
-            if k == nickname:
-                e = 'Esse nome de usuário já existe! Por favor, digite outro' 
-                return render_template('register.html', dic = DG, erro = e)
-        senha = request.form['senha']
-        for f in DG: 
-            if DG[f][6] == senha:
-                s = 'Esta senha já existe! Por favor, digite outra'
-                return render_template('register.html', dic = DG, erro = s)
-        cep = request.form['cep']
-        
-        DG[nickname]=[email, nome_completo, endereco, cep, cpf, nickname, senha] #devo criar objeto da classe Usuario para salvar, ou crio quando importo esses dados? 
-        my_firebase.put_sync(point="/Dicionário Geral", data=DG)
-        
-        return redirect(url_for('LogIn'))''' 
-    
      
     #o método para essa página é sempre GET (?); o POST manda os dados para o endpoint seguinte (POST  /Homepage)
     #se o método for GET: 
@@ -126,7 +94,7 @@ def Reg():
         endereco = request.form['endereco']
         cpf = request.form['cpf']
         nickname = request.form['usuario']
-        print(nickname)
+        
         for k in DG:
             if k == nickname:
                 e = 'Esse nome de usuário já existe! Por favor, digite outro' 
@@ -153,7 +121,7 @@ def home():
 
     usuario = request.args['usuario'] #aqui ele preenche o URL com o usuario
     
-    print("OLHA O USUARIO GET!!!!", usuario)
+    
     DG = eval(my_firebase.get_sync(point="/Dicionário Geral"))
     
     DC_anunciados = my_firebase.get_sync(point="/Dicionário de Carros")
@@ -168,25 +136,23 @@ def home():
         
         usuario = request.form['usuario'] #request.form!!
         senha = request.form['senha']
-        print(senha)
         
         
-        print("OLHA O USUARIO HOMI!!!!!!!!!!!!", usuario)
         
         if usuario in DG:
-            print("TA HOMI!!!!!!!!!!!!!!!!!!")
+            
             if DG[usuario][6]!=senha:
                 s = 'Senha inexistente!' #Mensagem de erro
                 return render_template('main.html', dic = DG, usuario=usuario, erro = s)
             else: 
                 return render_template("Homepage.html", anunciados=DC_anunciados,usuario=usuario, erro = '')
         else:
-            print("NUM TA HOMI!!!!!!!!!!!!!!!!!")
+            
             e = 'Usuario inexistente!' #Mensagem de erro
             return render_template('main.html', dic = DG, usuario=usuario, erro = e)#redirect(url_for('LogIn', usuario=usuario, erro = e))
 
     else:
-        print("OLHA O GET!!!!")
+       
         return render_template("Homepage.html", anunciados=DC_anunciados,usuario=usuario, erro = '')
     
     
@@ -306,28 +272,9 @@ def anunciar():
         DC_anunciados = eval(DC_anunciados)
         
     usuario = request.args['usuario'] 
-    print("USUARIO") 
+   
     
-    #if request.method == 'POST': 
-    ''' usuario = request.args['usuario']
-        try:
-            fabricante = request.form['fabricante']
-            modelo = request.form['modelo']
-            ano = request.form['ano']
-            cor = request.form['cor']
-            blindagem = request.form['blindagem'] 
-            periodo = request.form['periodo']
-            preco = request.form['preco']
-            print([fabricante,modelo,ano,cor,blindagem,periodo,preco])
-            
-            #DC_anunciados[usuario].append({modelo:[fabricante,modelo,ano,cor,blindagem,periodo,preco]})
-            #my_firebase.put_sync(point="/Dicionário de Carros Alugados", data=DC_anunciados)
-            return redirect(url_for('home', usuario=usuario))
-            #return render_template("submit.html", usuario=usuario, fabricante=fabricante, modelo=modelo, ano=ano, cor=cor,blindagem=blindagem, periodo=periodo, preco=preco)
-        except: 
-            e = "Por favor, verifique se os dados foram cadastrados corretamente"
-            return render_template('anunciar.html',usuario=usuario, erro=e)'''
-        
+   
     
     
     return render_template ('anunciar.html',usuario=usuario, anunciados=DC_anunciados, erro='')
@@ -354,8 +301,8 @@ def submit():
             blindagem = request.form['blindagem'] 
             periodo = request.form['periodo']
             preco = request.form['preco']
-     
-            print([fabricante,modelo,ano,cor,blindagem,periodo,preco])
+            DC_anunciados[usuario].append({modelo:[fabricante,modelo,ano,cor,blindagem,periodo,preco]})
+            my_firebase.put_sync(point="/Dicionário de Carros Alugados", data=DC_anunciados)
             return render_template("submit.html", usuario=usuario, fabricante=fabricante, modelo=modelo, ano=ano, cor=cor,blindagem=blindagem, periodo=periodo, preco=preco)
         
         except: 
@@ -363,9 +310,8 @@ def submit():
             return render_template('anunciar.html',usuario=usuario, erro=e)'''
             return render_template("submit.html", usuario=usuario)
         
-        #DC_anunciados[usuario].append({modelo:[fabricante,modelo,ano,cor,blindagem,periodo,preco]})
-        #my_firebase.put_sync(point="/Dicionário de Carros Alugados", data=DC_anunciados)
-        #return render_template('Homepage.html', usuario=usuario, erro='')
+        
+       
     else:
          
          return render_template('submit.html', usuario=usuario,fabricante=fabricante, modelo=modelo, ano=ano, cor=cor,blindagem=blindagem, periodo=periodo, preco=preco, erro='')
