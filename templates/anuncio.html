@@ -41,10 +41,10 @@
 						  
 							{% for e in : %}
 							<tr>
-								<td>{{ dic[e].Modelo }}</td>
-								<td>{{ dic[e].Ano }}</td>
-                                            <td>{{ dic[e].Cor }}</td>
-                                            <td>{{ dic[e].Preco_Sugerido }}</td>
+								<td>Modelo</td>
+								<td>Ano</td>
+                                            <td>Cor</td>
+                                            <td>Preço Sugerido</td>
 							
 
 								
@@ -60,7 +60,7 @@
 				  
 					<form class="vertical" method="POST">
 					<fieldset>
-						<legend>Homepage</legend>
+						<legend>Anuncio </legend>
 					
 						<div class="grid">
 
@@ -76,6 +76,9 @@
 						</div>
 					</fieldset>
 					</form>
+                               <a href="/Homepage?usuario={{usuario}}" />
+                               <button class="medium"><i class="fa fa-car"></i>Início</button>
+                               </a>
 				</div>
 			</div>
 		</div>

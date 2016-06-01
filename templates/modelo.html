@@ -28,20 +28,13 @@
 				<div class="col_8">
 				  
 					<form class="vertical" method="POST" action="/alugar/tabela?usuario={{usuario}}&modelo={{modelo}}">
-					<fieldset>
-						<legend>Escolha Do Modelo</legend>
 					
-						<div class="grid">
+<fieldset>
 
-					     <label for="modelo">Select Field</label>
-                                 <select id="modelo">
-                                 <option value="0">Escolha o Modelo</option>
-                                 <option value="1">modelos</option>
-{%for u in modelos:%}
-{%for i in modelos[u]%}
-<option value="i">{{modelos[u][i]}}</option>
-{%endfor%}
-{%endfor%}                                 </select>
+                                
+                                <label for="modelo"><big>Digite o Modelo</big></label>
+
+                                <input id="modelo" name="modelo" type="text" />
 
 							<div class="col_12 right">
 							<button class="medium"><i class="fa fa-car"></i>Procurar</button>
