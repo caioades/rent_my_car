@@ -12,7 +12,7 @@
 </head>
 <body>
 <!--criar 2 tabs-->
-<div id="tabr2" class="tab-content">
+<div id="usuario" class="tab-content">
       <div class="grid">
 	<div class="col_12">
 
@@ -28,24 +28,28 @@
                                <button class="medium"><i class="fa fa-car"></i>Início</button>
                                </a>
 
-{%for e in usuarios: %}
-<div class="grid"> <p><strong>Dados do Usuário</strong></p>	
-<li>Usuário: {{e}}  </li> 
-<li>Email: {{usuarios[e][0]}}  </li> 
-<li>Nome Completo: {{usuarios[e][1]}}  </li> 
-<li>Endereço: {{usuarios[e][2]}}  </li>
-<li>CEP: {{usuarios[e][3]}}  </li>
-<li>CPF: {{usuarios[e][4]}}  </li>
-{%endfor%}
+<div class="grid"> 
+<dl>
+<dt><strong><big>Dados do Usuário</big></strong></dt>	
 
-<p><strong>Carros Anunciados </strong></p>	
+<dd>Usuário: {{usuario}}  </dd> 
+<dd>Email: {{usuarios[usuario][0]}}  </dd> 
+<dd>Nome Completo: {{usuarios[usuario][1]}}  </dd> 
+<dd>Endereço: {{usuarios[usuario][2]}}  </dd>
+<dd>CEP: {{usuarios[usuario][3]}}  </dd>
+<dd>CPF: {{usuarios[usuario][4]}}  </dd>
+
+
+<dt><strong><big>Carros Anunciados </big></strong></dt>	
 {%for k in anunciados[usuario]:%}
-<li>Carro: {{anunciados[usuario][k][0]}}/{{anunciados[usuario][k][1]}} </li> 
-<li>Ano: {{anunciados[usuario][k][2]}}</li> 
-<li>Cor: {{anunciados[usuario][k][3]}} </li>
-<p><strong>Lances </strong></p>
-{%endfor%}
+<dd>Carro: {{anunciados[usuario][k][0]}}/{{anunciados[usuario][k][1]}} </dd> 
+<dd>Ano: {{anunciados[usuario][k][2]}}</dd> 
+<dd>Cor: {{anunciados[usuario][k][3]}} </dd>
 
+
+<dt><strong><big>Lances</big></strong></dt>
+{%endfor%}
+</dl>
 
 
 </div>

@@ -11,14 +11,23 @@
 <script type="text/javascript" src= "{{ url_for('static',filename='js/kickstart.js') }}"></script>                                  <!-- KICKSTART -->
 </head>
 <body>
-		
+		{{usuario}}
 		<div id="anunciar" class="tab-content">
 			<div class="grid">
+
+
+                            {% if erro != '': %}
+						<div class="notice error"><i class="icon-remove-sign icon-large"></i> 
+                            {{ erro }} 
+						<a href="#close" class="icon-remove"></a></div>
+					{% endif %} 
+
+
 
 				<div class="col_2"></div>
 				<div class="col_8">
 				    
-					<form class="vertical" method="POST" action="./Homepage">
+					<form class="vertical" method="POST" action="/anunciar/submit?usuario={{usuario}}&fabricante={{fabricante}}&modelo={{modelo}}&ano={{ano}}&cor={{cor}}&blindagem={{blindagem}}&periodo={{periodo}}&preco={{preco}}">
 					<fieldset>
 						<legend>Novo Veículo</legend>
 					
@@ -29,61 +38,58 @@
 						<label for="fabricante">Fabricante</label>
                                  <select id="fabricante">
                                  <option value="0">Escolha o Fabricante</option>
-                                 <option value="1">Audi</option>
-                                 <option value="2">Ferrari</option>
-                                 <option value="3">Porsche</option>
+                                 <option value="audi">Audi</option>
+                                 <option value="ferrari">Ferrari</option>
+                                 <option value="porsche">Porsche</option>
                                  </select>
                                 
                                 
 						<label for="modelo">Modelo</label>
                                  <select id="modelo">
                                  <option value="0">Escolha o Modelo</option>
-                                 <option value="1">Audi A3</option>
-                                 <option value="2">Audi Q5</option>
-                                 <option value="3">Audi TT</option>
+                                 <option value="A3">A3</option>
+                                 <option value="Q5">Q5</option>
+                                 <option value="TT">TT</option>
                                  </select>
                                 
                                  <label for="ano">Ano</label>
                                  <select id="ano">
                                  <option value="0">Escolha o Ano</option>
-                                 <option value="1">2016</option>
-                                 <option value="2">2015</option>
-                                 <option value="3">2014</option>
+                                 <option value="2016">2016</option>
+                                 <option value="2015">2015</option>
+                                 <option value="2014">2014</option>
                                  </select>
                                 
                                  <label for="cor">Cor</label>
                                  <select id="cor">
                                  <option value="0">Escolha a Cor</option>
-                                 <option value="1">Preto</option>
-                                 <option value="2">Amarelo</option>
-                                 <option value="3">Branco</option>
+                                 <option value="preto">Preto</option>
+                                 <option value="amarelo">Amarelo</option>
+                                 <option value="branco">Branco</option>
                                  </select>
 
                                 <legend>Possui Blindagem?</legend>    
-                                <input type="checkbox" id="blindagem" />
-                                <label for="blindagem" class="inline">Sim</label>
-                                <input type="checkbox" id="blindagem" />
-                                <label for="blindagem" class="inline">Nao</label>
+                                <input type="radio" name="blindagem" value="SIM"> Sim<br>
+                                <input type="radio" name="blindagem" value="NAO"> Não<br>
+            
 
-                                <input type="checkbox" id="aluguel" />
-                                <label for="aluguel" class="inline">Aluguel Diário</label>
-                            <div class="col_6">
-                                <input type="checkbox" id="aluguel" />
-					    <label for="aluguel" class="inline">Aluguel Semanal</label> 					
-					</div>
-                                <input type="checkbox" id="aluguel" />
-                                <label for="auguel" class="inline">Aluguel Mensal</label>
+                                <input type="radio" name="periodo" value="dia"> Aluguel Diário<br>
+                                <input type="radio" name="periodo" value="semana">Aluguel Semanal<br>
+                                <input type="radio" name="periodo" value="mes">Aluguel Mensal<br>  
 
-                                <input type="checkbox" id="preco" />
+                                <input id="preco" name="preco" type="text" />
                                 <label for="preco">Escolha o Preço do Aluguel</label>
+
+							
 
 						</div>
 					</div>
+                                            <button class="medium"><i class="fa fa-car"></i>Submit</button>
 					</fieldset>
 					</form>
-                                <a href="/Homepage" />
-                                <button class="medium"><i class="fa fa-car"></i>Submit</button>
-                                </a>
+                            
+                                
+
 				</div>
 				<div class="col_2"></div>
 			</div>

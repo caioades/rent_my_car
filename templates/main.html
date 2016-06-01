@@ -12,6 +12,13 @@
 </head>
 <body>
 
+                            {% if erro != '': %}
+						<div class="notice error"><i class="icon-remove-sign icon-large"></i> 
+                            {{ erro }} 
+						<a href="#close" class="icon-remove"></a></div>
+					{% endif %}
+
+
 		<div id="Tela_Inicial" class="tab-content">
 			<div class="grid">
 
@@ -27,16 +34,12 @@
 					
 						<div class="grid">
 
+                            
+
 							<div class="col_6">
 							<label for="usuario">Usuário</label>
 							<input id="usuario" name="usuario" type="text" />
 							</div>
-
-                            {% if erro != '': %}
-						<div class="notice error"><i class="icon-remove-sign icon-large"></i> 
-                            {{ erro }} 
-						<a href="#close" class="icon-remove"></a></div>
-					{% endif %}
 
 
 							<div class="col_6">
@@ -44,11 +47,6 @@
 							<input id="senha" name="senha" type="text" />
 							</div>
 
-                            {% if erro != '': %}
-						<div class="notice error"><i class="icon-remove-sign icon-large"></i> 
-                            {{ erro }} 
-						<a href="#close" class="icon-remove"></a></div>
-					{% endif %}
 
 
 

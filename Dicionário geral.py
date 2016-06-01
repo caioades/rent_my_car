@@ -3,6 +3,10 @@
 Created on Mon May 16 16:59:01 2016
 
 @author: caioades
+
+
+NOTA: NAO MEXER NUNCA MAIS!! 
+submitar dados por meio de outros programas (caso contrário, serão perdidos todos os dados armazenados previamente no Firebase)
 """
 
 import firecall
@@ -15,9 +19,9 @@ my_firebase.put_sync(point="/Dicionário Geral", data=DG)
 
 
 
-DC_anunciados = {"usuario" : [{"veiculo":["fabricante","modelo","ano","cor","S"]},{"veiculo":["fabricante","modelo","ano","cor","N"]}]}
+DC_anunciados = {"usuario" : [{"veiculo":["fabricante","modelo","ano","cor","S","preco","periodo"]},{"veiculo":["fabricante","modelo","ano","cor","N","preco","periodo"]}]}
 
-my_firebase.put_sync(point="/Dicionário de Carros Alugados", data=DC_anunciados)
+my_firebase.put_sync(point="/Dicionário de Carros Anunciados", data=DC_anunciados)
 
 
 
@@ -32,11 +36,3 @@ D_lances = {"usuario" : [{"veiculo":[{"lance1":"usuario1"},{"lance2":"usuario2"}
 my_firebase.put_sync(point="/Registro de Renegociações", data=D_lances)
 
 
-print(DC_anunciados["usuario"][0]["veiculo"][1])
-for e in DG:
-    if e == "usuario":
-        print("aleluia")
-    else:
-        print(e)
-        
-print(D_lances)
