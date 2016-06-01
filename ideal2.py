@@ -61,7 +61,7 @@ import firecall
 app = Flask(__name__)
 
 app.secret_key='\xd0\xe2\xef\xbdq~\x99\xe9\xe7Z\x13i\x87Vlx0q5n\x14\x10D\xb7'
-
+ 
 
 
 
@@ -69,42 +69,37 @@ app.secret_key='\xd0\xe2\xef\xbdq~\x99\xe9\xe7Z\x13i\x87Vlx0q5n\x14\x10D\xb7'
 def LogIn(): #mainpage - pagina login e senha/ register
     
     #importar DG do firebase (GET)
-    #my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
-    #DG = eval(my_firebase.get_sync(point="/Dicionário Geral"))
+    my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
+    DG = eval(my_firebase.get_sync(point="/Dicionário Geral"))
     #usuario='oi' 
-    
     print("OLHA EU AQUI")
    
-    #if request.method == 'POST':
-        
-    # usuario = request.args['usuario']
-    #print("OLHA O USUARIO!!!!!!!!!!!!", usuario)
-    #senha = request.args['senha']
-    
-    #return redirect(url_for('home', usuario=usuario, senha=senha))
     
     #mensagem de erro para a pagina register:
-    ''' for k in DG:
-            if k == nickname:
-                e = 'Esse nome de usuário já existe! Por favor, digite outro' 
-                return render_template('register.html', dic = DG, erro = e)
-        senha = request.form['senha']
-        for f in DG: 
-            if DG[f][6] == senha:
-                s = 'Esta senha já existe! Por favor, digite outra'
-                return render_template('register.html', dic = DG, erro = s)
-        cep = request.form['cep']
+    if request.method == 'POST':
         
-        DG[nickname]=[email, nome_completo, endereco, cep, cpf, nickname, senha] #devo criar objeto da classe Usuario para salvar, ou crio quando importo esses dados? 
-        my_firebase.put_sync(point="/Dicionário Geral", data=DG)
+        usuario = request.args['usuario']
         
-        return redirect(url_for('LogIn'))''' 
+        senha = request.form['senha'] 
+        
+        print("OLHA O USUARIO!!!!!!!!!!!!", usuario)
+        
+        if usuario in DG:
+            print("TA!!!!!!!!!!!!!!!!!!")
+            if DG[usuario][6]!=senha:
+                s = 'Senha inexistente!' #Mensagem de erro
+                return render_template('main2.html', dic = DG, usuario=usuario, erro = s)
+            else: 
+                return redirect(url_for("home", usuario=usuario, erro = ''))
+        else:
+            print("NUM TA!!!!!!!!!!!!!!!!!")
+            e = 'Usuario inexistente!' #Mensagem de erro
+            return render_template('main2.html', dic = DG, usuario=usuario, erro = e)#redirect(url_for('LogIn', usuario=usuario, erro = e))
+
+    else:
+        print("OLHA O GET!!!!")
+        return render_template("main2.html", erro = '')
     
-     
-    #o método para essa página é sempre GET (?); o POST manda os dados para o endpoint seguinte (POST  /Homepage)
-    #se o método for GET: 
-    #usuario=usuario,
-    return render_template('main.html', erro = '')
     
 
 
@@ -164,13 +159,9 @@ def home():
          
     #Mensagens de erro referentes ao endpoint '/':
     if request.method == 'POST':
+        usuario = request.args['usuario']
         
-        
-        usuario = request.form['usuario'] #request.form!!
-        senha = request.form['senha']
-        print(senha)
-        
-        
+        senha = request.form['senha'] 
         print("OLHA O USUARIO HOMI!!!!!!!!!!!!", usuario)
         
         if usuario in DG:
@@ -252,9 +243,9 @@ def modelo():
     
     usuario = request.args['usuario']
     
-    periodo = request.form['periodo']
+    modelo = request.form['Modelo']
     
-    return render_template("modelo.html",usuario=usuario,periodo=periodo, erro = '')
+    return render_template("modelo.html",usuario=usuario, erro = '')
 
     
     
@@ -273,27 +264,24 @@ def tabela():
 def anuncio():
     
     usuario = request.args['usuario'] 
-    
-    anunciador = request.args['u']
      
-    return render_template("anuncio.html", usuario=usuario, u=anunciador, erro='')
+    return render_template("anuncio.html",usuario=usuario, erro='')
     
     
 
     
 @app.route('/alugar/renegociar',methods=['GET','POST']) #(V) opção de dar um lance de barganha 
 def barganha():
-    
     usuario = request.args['usuario']
     
     preco = request.forms['preco']
     
-    return render_template("renegociar.html",usuario=usuario,preco=preco, erro='')
+    return render_template("renegociar.html",usuario=usuario, erro='')
 
 
 
 
-@app.route('/anunciar',methods=['GET','POST']) #endereço para anunciar um carro
+@app.route('/anunciar',methods=['GET','POST'])
 def anunciar():
     
     my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
@@ -306,31 +294,30 @@ def anunciar():
     usuario = request.args['usuario'] 
     print("USUARIO") 
     
-    #if request.method == 'POST': 
-    ''' usuario = request.args['usuario']
+    if request.method == 'POST': 
         try:
-            fabricante = request.form['fabricante']
-            modelo = request.form['modelo']
-            ano = request.form['ano']
-            cor = request.form['cor']
-            blindagem = request.form['blindagem'] 
-            periodo = request.form['periodo']
-            preco = request.form['preco']
+            fabricante = request.args['fabricante']
+            modelo = request.args['modelo']
+            ano = request.args['ano']
+            cor = request.args['cor']
+            blindagem = request.args['blindagem'] 
+            periodo = request.args['periodo']
+            preco = request.args['preco']
             print([fabricante,modelo,ano,cor,blindagem,periodo,preco])
             
-            #DC_anunciados[usuario].append({modelo:[fabricante,modelo,ano,cor,blindagem,periodo,preco]})
-            #my_firebase.put_sync(point="/Dicionário de Carros Alugados", data=DC_anunciados)
+            DC_anunciados[usuario].append({modelo:[fabricante,modelo,ano,cor,blindagem,periodo,preco]})
+            my_firebase.put_sync(point="/Dicionário de Carros Alugados", data=DC_anunciados)
             return redirect(url_for('home', usuario=usuario))
             #return render_template("submit.html", usuario=usuario, fabricante=fabricante, modelo=modelo, ano=ano, cor=cor,blindagem=blindagem, periodo=periodo, preco=preco)
         except: 
             e = "Por favor, verifique se os dados foram cadastrados corretamente"
-            return render_template('anunciar.html',usuario=usuario, erro=e)'''
+            return render_template('anunciar.html',usuario=usuario, erro=e)
         
     
     
     return render_template ('anunciar.html',usuario=usuario, anunciados=DC_anunciados, erro='')
-
-@app.route('/anunciar/submit',methods=['GET','POST']) #funcionalidade de cadastro
+'''
+@app.route('/anunciar/submit',methods=['GET','POST'])
 def submit():
     usuario = request.args['usuario']
     my_firebase = firecall.Firebase("https://rent-my-car.firebaseio.com/")
@@ -341,31 +328,30 @@ def submit():
         DC_anunciados = eval(DC_anunciados)
     
     
-    if request.method == 'POST': 
+    #if request.method == 'POST': 
    
     
-        try:
-            fabricante = request.form['fabricante']
-            modelo = request.form['modelo']
-            ano = request.form['ano']
-            cor = request.form['cor']
-            blindagem = request.form['blindagem'] 
-            periodo = request.form['periodo']
-            preco = request.form['preco']
-
-            print([fabricante,modelo,ano,cor,blindagem,periodo,preco])
-            return render_template("submit.html", usuario=usuario, fabricante=fabricante, modelo=modelo, ano=ano, cor=cor,blindagem=blindagem, periodo=periodo, preco=preco)
-        except: 
-            e = "Por favor, verifique se os dados foram cadastrados corretamente"
-            return render_template('anunciar.html',usuario=usuario, erro=e)
-                
+    try:
+        fabricante = request.args['fabricante']
+        modelo = request.args['modelo']
+        ano = request.args['ano']
+        cor = request.args['cor']
+        blindagem = request.args['blindagem'] 
+        periodo = request.args['periodo']
+        preco = request.args['preco']
+        print([fabricante,modelo,ano,cor,blindagem,periodo,preco])
+        return render_template("submit.html", usuario=usuario, fabricante=fabricante, modelo=modelo, ano=ano, cor=cor,blindagem=blindagem, periodo=periodo, preco=preco)
+    except: 
+        e = "Por favor, verifique se os dados foram cadastrados corretamente"
+        return render_template('anunciar.html',usuario=usuario, erro=e)
+            
         
         #DC_anunciados[usuario].append({modelo:[fabricante,modelo,ano,cor,blindagem,periodo,preco]})
         #my_firebase.put_sync(point="/Dicionário de Carros Alugados", data=DC_anunciados)
         #return render_template('Homepage.html', usuario=usuario, erro='')
-    else:
-         
-         return render_template('submit.html', usuario=usuario,fabricante=fabricante, modelo=modelo, ano=ano, cor=cor,blindagem=blindagem, periodo=periodo, preco=preco, erro='')
+        
+        
+    return render_template('submit.html', usuario=usuario,fabricante=fabricante, modelo=modelo, ano=ano, cor=cor,blindagem=blindagem, periodo=periodo, preco=preco, erro='')''' 
       
     
 if __name__ == "__main__":

@@ -34,23 +34,30 @@
 						</tr></thead>
 						<tbody>
 						   
-							{% for usuario in anunciados: %}
-                                            {%for i in anunciados[usuario]%}
-                                                {%for veiculo in anunciados[usuario][i]%}
+							{% for u in anunciados: %}
+                                            {%for i in anunciados[u]%}
+                                                {%for veiculo in anunciados[u][i]%}
 							<tr>
-                               <td> <a href="/anunciar/anuncio?usuario={{usuario}}" />
-					   <button class="medium"><i class="fa fa-car"></i></button>
+                              
+								<td> <a href="/anunciar/anuncio?usuario={{usuario}}&anunciador={{u}}" />
+					   <button class="medium"><i class="fa fa-car"></i> {{anunciados[u][i][veiculo]}}</button>
                                </a></td>
-								<td> {{anunciados[usuario][i][veiculo]}} </td>
-								<td>{{ anunciados[usuario][i][veiculo][2] }}</td>
-								<td>{{ anunciados[usuario][i][veiculo][3] }}</td>
-								<td>{{ usuario }}</td>
+								<td>{{ anunciados[u][i][veiculo][2] }}</td>
+								<td>{{ anunciados[u][i][veiculo][3] }}</td>
+								<td>{{ u }}</td>
 
 								<td><a href="./del?placa={{ e }}"><i class="fa fa-trash"></i></a></td>
 							</tr>
 							{% endfor %}
+                                         {% endfor %}
+                                            {% endfor %}
+
 						</tbody>
 					</table>
+
+                            <a href="/Homepage?usuario={{usuario}}" />
+                               <button class="medium"><i class="fa fa-car"></i>Início</button>
+                               </a>
 				</div>
 			</div>
 		</div>
